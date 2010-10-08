@@ -17,6 +17,11 @@ pymateinfo = "PyMATE\n\n"\
 "There is NO WARRANTY, to the extent permitted by law."
 
 class PyMATE( wx.Frame ):
+	"""Main PyMATE class."""
+	
+	# -------------------- #
+	# Init function
+	# -------------------- #
 	def __init__( self, options, args ):
 		wx.Frame.__init__( self, None, wx.ID_ANY, "PyMATE" )
 		self.menubar = wx.MenuBar()
@@ -70,6 +75,9 @@ class PyMATE( wx.Frame ):
 				tab.loadFile( arg )
 				self.switchToTab( tab )
 	
+	# -------------------- #
+	# Event handlers
+	# -------------------- #
 	def onAbout( self, event ):
 		"""Called on about."""
 		aboutdlg = wx.MessageDialog( self,
@@ -138,6 +146,9 @@ class PyMATE( wx.Frame ):
 			f = os.path.join( dn, fn )
 			tab.saveFile( f )
 	
+	# -------------------- #
+	# Util functions
+	# -------------------- #
 	def exit( self, event ):
 		"""Exit program."""
 		self.Close()

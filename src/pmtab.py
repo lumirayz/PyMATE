@@ -4,6 +4,10 @@ import os
 
 class PMTab( wx.Panel ):
 	"""Tab class."""
+	
+	# -------------------- #
+	# Init function
+	# -------------------- #
 	def __init__( self, parent ):
 		wx.Panel.__init__( self, parent )
 		self.parent = parent
@@ -16,11 +20,17 @@ class PMTab( wx.Panel ):
 		self.file = None
 		self.edited = False
 	
+	# -------------------- #
+	# Event handlers
+	# -------------------- #
 	def onTextChange( self, event ):
 		"""Called on text change."""
 		self.edited = True
 		self.updateTitle()
 	
+	# -------------------- #
+	# Util functions
+	# -------------------- #
 	def setTitle( self, title ):
 		"""Set the tab's title."""
 		self.parent.SetPageText( self.gui.getTabIdByContents( self ),

@@ -10,16 +10,20 @@ parser = OptionParser()
 parser.add_option( "-v", "--version", dest = "version", action = "store_true",
 	default = False, help = "show version info and exit" )
 
-if __name__ == "__main__":
-	( options, args ) = parser.parse_args()
-	
-	if( options.version ):
-		print( "PyMATE\n\n"\
+def showVersionInfo():
+	"""Function to show version information."""
+	print( "PyMATE\n\n"\
 			"Copyright (C) 2010 Lumirayz\n"\
 			"License GPLv3+: GNU GPL version 3 or later "\
 			"<http://gnu.org/licenses/gpl.html>.\n"\
 			"This is free software: you are free to change and redistribute it.\n"\
 			"There is NO WARRANTY, to the extent permitted by law." )
+
+if __name__ == "__main__":
+	( options, args ) = parser.parse_args()
+	
+	if( options.version ):
+		showVersionInfo()
 		exit()
 	
 	app = wx.App()	
