@@ -44,6 +44,12 @@ class PyMATE( wx.Frame ):
 		
 		self.sizer.Add( self.notebook, 1, wx.EXPAND )
 		self.SetSizer( self.sizer )
+		
+		for arg in args:
+			if( os.path.isfile( arg ) ):
+				tab = self.addTab()
+				tab.loadFile( arg )
+				self.switchToTab( tab )
 	
 	def onAbout( self, event ):
 		"""Called on about."""
