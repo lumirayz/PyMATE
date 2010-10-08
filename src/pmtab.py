@@ -38,7 +38,7 @@ class PMTab( wx.Panel ):
 		"""Load a file into this tab."""
 		if( f == None ):
 			if( self.file == None ):
-				return #Failure to save anything.
+				return #Failure to load anything.
 			else:
 				f = self.file
 		fd = open( f, "r" )

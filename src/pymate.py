@@ -73,8 +73,10 @@ class PyMATE( wx.Frame ):
 			if( not self.fileOpened( f ) ):
 				tab = self.addTab()
 				tab.loadFile( f )
+				self.switchToTab( tab )
 			else:
-				pass
+				tab = self.getOpenedFileTab( f )
+				self.switchToTab( tab )
 	
 	def onSaveNow( self, event ):
 		"""Called on save."""
@@ -122,8 +124,9 @@ class PyMATE( wx.Frame ):
 		tc = self.notebook.GetPageCount()
 		for i in range( tc ):
 			tab = self.notebook.GetPage( i )
-			if( tab.file == f ):
-				return tab
+			if( tab.file and f ):
+				if( tab.file == f ):
+					return tab
 		return None
 	
 	def getOpenedFileTabId( self, f ):
@@ -131,8 +134,9 @@ class PyMATE( wx.Frame ):
 		tc = self.notebook.GetPageCount()
 		for i in range( tc ):
 			tab = self.notebook.GetPage( i )
-			if( tab.file == f ):
-				return i
+			if( tab.file and f ):
+				if( tab.file == f ):
+					return i
 		return -1
 	
 	def getCurrentTabId( self ):
@@ -157,6 +161,15 @@ class PyMATE( wx.Frame ):
 		tab = PMTab( self.notebook )
 		self.notebook.AddPage( tab, "**Unsaved**" )
 		return tab
+	
+	def switchToTab( self, tab ):
+		"""Switches to a set tab."""
+		tc = self.notebook.GetPageCount()
+		for i in range( tc ):
+			tb = self.notebook.GetPage( i )
+			if( tb == tab ):
+				self.notebook.SetSelection( i )
+				return		
 	
 	def show( self ):
 		"""Show the window."""
