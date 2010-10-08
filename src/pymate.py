@@ -4,12 +4,12 @@ import os
 from pmtab import *
 
 pymateinfo = "PyMATE\n\n"\
-
+\
 "Python Minimalistic and Awesome Text Editor.\n\n"\
-
+\
 "A text editor aimed at people that don't like lots of buttons cluttering "\
 "their workspace and slow startup times.\n\n"\
-
+\
 "Copyright (C) 2010 Lumirayz\n"\
 "License GPLv3+: GNU GPL version 3 or later "\
 "<http://gnu.org/licenses/gpl.html>.\n"\
@@ -40,6 +40,10 @@ class PyMATE( wx.Frame ):
 		self.file_exit = self.file_menu.Append( wx.ID_EXIT,
 			"E&xit" , "Terminate the program." )
 		self.menubar.Append( self.file_menu, "&File" )
+		self.edit_undo = self.edit_menu.Append( wx.ID_UNDO,
+			"&Undo" , "Undo last action." )
+		self.edit_redo = self.edit_menu.Append( wx.ID_REDO,
+			"&Redo" , "Redo undone action." )
 		self.menubar.Append( self.edit_menu, "&Edit" )
 		self.help_about = self.help_menu.Append( wx.ID_ABOUT,
 			"&About", "About the program." )
@@ -52,6 +56,8 @@ class PyMATE( wx.Frame ):
 		self.Bind( wx.EVT_MENU, self.onClose, self.file_close )
 		self.Bind( wx.EVT_MENU, self.exit, self.file_exit )
 		self.Bind( wx.EVT_MENU, self.onAbout, self.help_about )
+		self.Bind( wx.EVT_MENU, self.onUndo, self.edit_undo )
+		self.Bind( wx.EVT_MENU, self.onRedo, self.edit_redo )
 		
 		self.SetMenuBar( self.menubar )
 		
@@ -81,6 +87,14 @@ class PyMATE( wx.Frame ):
 		sel = self.getCurrentTabId()
 		if( sel != -1 ):
 			self.notebook.DeletePage( sel )
+	
+	def onUndo( self, event ):
+		"""Will be called if the undo button is pressed."""
+		self.getCurrentTab().textctrl.Undo()
+	
+	def onRedo( self, event ):
+		"""Will be called if the redo button is pressed."""
+		self.getCurrentTab().textctrl.Redo()
 	
 	def onOpen( self, event ):
 		"""Called on open."""

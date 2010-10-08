@@ -1,4 +1,5 @@
 import wx
+import wx.stc
 import os
 
 class PMTab( wx.Panel ):
@@ -7,8 +8,8 @@ class PMTab( wx.Panel ):
 		wx.Panel.__init__( self, parent )
 		self.parent = parent
 		self.gui = parent.GetParent()
-		self.textctrl = wx.TextCtrl( self, style = wx.TE_MULTILINE )
-		self.Bind( wx.EVT_TEXT, self.onTextChange, self.textctrl )
+		self.textctrl = wx.stc.StyledTextCtrl( self, wx.ID_ANY )
+		self.Bind( wx.stc.EVT_STC_CHANGE, self.onTextChange, self.textctrl )
 		self.sizer = wx.BoxSizer()
 		self.sizer.Add( self.textctrl, 1, wx.EXPAND )
 		self.SetSizer( self.sizer )
@@ -22,7 +23,7 @@ class PMTab( wx.Panel ):
 	
 	def setTitle( self, title ):
 		"""Set the tab's title."""
-		self.parent.SetPageText( self.parent.GetParent().getTabIdByContents( self ),
+		self.parent.SetPageText( self.gui.getTabIdByContents( self ),
 			title )
 	
 	def updateTitle( self ):
@@ -45,7 +46,7 @@ class PMTab( wx.Panel ):
 				f = self.file
 		fd = open( f, "r" )
 		self.file = f
-		self.textctrl.SetValue( fd.read() )
+		self.textctrl.SetText( fd.read() )
 		self.edited = False
 		self.updateTitle()
 		fd.close()
@@ -61,5 +62,5 @@ class PMTab( wx.Panel ):
 		self.file = f
 		self.edited = False
 		self.updateTitle()
-		fd.write( self.textctrl.GetValue() )
+		fd.write( self.textctrl.GetText() )
 		fd.close()
