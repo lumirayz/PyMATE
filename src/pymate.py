@@ -4,7 +4,7 @@ import os
 from pmtab import *
 
 class PyMATE( wx.Frame ):
-	def __init__( self ):
+	def __init__( self, options, args ):
 		wx.Frame.__init__( self, None, wx.ID_ANY, "PyMATE" )
 		self.menubar = wx.MenuBar()
 		self.file_menu = wx.Menu()
