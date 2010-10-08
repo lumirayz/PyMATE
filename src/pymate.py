@@ -3,6 +3,19 @@ import os
 
 from pmtab import *
 
+pymateinfo = "PyMATE\n\n"\
+
+"Python Minimalistic and Awesome Text Editor.\n\n"\
+
+"A text editor aimed at people that don't like lots of buttons cluttering "\
+"their workspace and slow startup times.\n\n"\
+
+"Copyright (C) 2010 Lumirayz\n"\
+"License GPLv3+: GNU GPL version 3 or later "\
+"<http://gnu.org/licenses/gpl.html>.\n"\
+"This is free software: you are free to change and redistribute it.\n"\
+"There is NO WARRANTY, to the extent permitted by law."
+
 class PyMATE( wx.Frame ):
 	def __init__( self, options, args ):
 		wx.Frame.__init__( self, None, wx.ID_ANY, "PyMATE" )
@@ -54,7 +67,7 @@ class PyMATE( wx.Frame ):
 	def onAbout( self, event ):
 		"""Called on about."""
 		aboutdlg = wx.MessageDialog( self,
-			"MATE rewrite in Python.",
+			pymateinfo,
 			"About PyMATE" )
 		aboutdlg.ShowModal()
 		aboutdlg.Destroy()

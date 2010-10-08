@@ -1,4 +1,5 @@
-- Add auto indentation
-- Add undo
-- Add comment/uncomment
-- Add configuration
+- auto indentation
+- undo
+- comment/uncomment
+- configuration
+- tab modes: NONE, WORKSPACE, FULL
