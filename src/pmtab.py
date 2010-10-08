@@ -6,6 +6,7 @@ class PMTab( wx.Panel ):
 	def __init__( self, parent ):
 		wx.Panel.__init__( self, parent )
 		self.parent = parent
+		self.gui = parent.GetParent()
 		self.textctrl = wx.TextCtrl( self, style = wx.TE_MULTILINE )
 		self.Bind( wx.EVT_TEXT, self.onTextChange, self.textctrl )
 		self.sizer = wx.BoxSizer()
@@ -21,7 +22,8 @@ class PMTab( wx.Panel ):
 	
 	def setTitle( self, title ):
 		"""Set the tab's title."""
-		self.parent.SetPageText( self.parent.GetParent().getTabIdByContents( self ) , title )
+		self.parent.SetPageText( self.parent.GetParent().getTabIdByContents( self ),
+			title )
 	
 	def updateTitle( self ):
 		"""Update the title."""
