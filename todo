@@ -4,3 +4,8 @@
 - comment/uncomment
 - tab modes: NONE, WORKSPACE, FULL
 - fix pymate.bat for command-line arguments
+- line numbers
+- margins
+- view tabs and whitespace
+- syntax highlighting
+- tab sizes
