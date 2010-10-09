@@ -111,13 +111,10 @@ class PMGui( wx.Frame ):
 	def buildNotebook( self ):
 		"""Builds the Notebook."""
 		pos = self.conf.getProperty( "editor.tab.position" )
-		if( pos ):
-			pos = pos.lower()
-			try:
-				pos = PMGui.TabPositionTable[ pos ]
-			except KeyError:
-				pos = wx.NB_LEFT
-		else:
+		pos = pos.lower()
+		try:
+			pos = PMGui.TabPositionTable[ pos ]
+		except KeyError:
 			pos = wx.NB_LEFT
 		self.notebook = wx.Notebook( self, -1, wx.DefaultPosition, wx.DefaultSize, pos )
 	
@@ -242,10 +239,7 @@ class PMGui( wx.Frame ):
 	def addPage( self ):
 		"""Add a page to the editor."""
 		tmode = self.conf.getProperty( "editor.tab.mode" )
-		if( tmode ):
-			tmode = tmode.lower()
-		else:
-			tmode = "full"
+		tmode = tmode.lower()
 		if( tmode == "full" or tmode == "workspace" ):
 			page = pmpage.PMPage( self.notebook, self )
 			self.notebook.AddPage( page, "" )

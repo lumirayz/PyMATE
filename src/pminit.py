@@ -56,6 +56,7 @@ if( __name__ == "__main__" ):
 	( options, args ) = parser.parse_args()
 	
 	conf = pmconfig.PMConfig()
+	conf.loadDefaults()
 	
 	if( options.version ):
 		showVersionInfo()

@@ -22,6 +22,33 @@ class PMConfig:
 		self.props = dict()
 	
 	# -------------------- #
+	# Defaults
+	# -------------------- #
+	defaults = {
+		"editor": {
+			"dialog": { "config_unsaved_close": "1" },
+			"tab": {
+				"mode": "full",
+				"position": "right",
+			},
+			"startup": { "blank_file": "0" },
+			"backup": {
+				"enabled": "1",
+				"suffix": ".bak"
+			},
+			"indent": {
+				"auto": "1",
+				"spaces": "0",
+				"tabsize": "2",
+			},
+			"highlight": {
+				"bracket": "1",
+				"syntax": "1"
+			}
+		}
+	}
+	
+	# -------------------- #
 	# File loading/saving
 	# -------------------- #
 	def parseFile( self, f ):
@@ -78,6 +105,22 @@ class PMConfig:
 			key = data[0].strip()
 			val = data[1].strip()
 			self.props[ ".".join( nsl + [ key ] ) ] = val
+	
+	# -------------------- #
+	# Load a dict
+	# -------------------- #
+	def loadDict( self, di, ns = list() ):
+		for key, val in di.items():
+			if( type( val ) == dict ):
+				self.loadDict( val, ns + [ key ] )
+			elif( type( val ) == str ):
+				self.props[ ".".join( ns + [ key ] ) ] = val
+	
+	# -------------------- #
+	# Defaults
+	# -------------------- #
+	def loadDefaults( self ):
+		self.loadDict( PMConfig.defaults )
 	
 	# -------------------- #
 	# Properties
