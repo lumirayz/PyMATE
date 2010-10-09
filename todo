@@ -1,5 +1,6 @@
 - auto indentation
+- add saving configuration
+- make PMConfig do typechecking
 - comment/uncomment
-- configuration, preferably abstract this (singleton, anyone?)
 - tab modes: NONE, WORKSPACE, FULL
-- maybe will have to recode, have been confusing "page" and "tab" in pmtab.py
+- fix pymate.bat for command-line arguments
