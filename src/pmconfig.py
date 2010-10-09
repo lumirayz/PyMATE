@@ -26,6 +26,18 @@ class PMConfig:
 	# -------------------- #
 	def parseFile( self, f ):
 		"""Load all configuration options in a file."""
+		# How it works:
+		# First opens a file, initializes namespace list.
+		# Loops every line in the file:
+		#  If the length of the file < 2, don't bother.
+		#  Removes trailing \r\n, checks indentation and stores in ind.
+		#  Checks indentation length with namespace length, trimming namespace list
+		#  if needed.
+		#  Checks if the line is in the format r"^\[(.*)\]$". (without regex)
+		#  If True:
+		#   Append the part in braces to namespace list.
+		#  Else:
+		#   Call parseLine on the file, giving it line and namespace list.
 		fd = open( f, "r" )
 		nsl = list()
 		for line in fd:
@@ -53,6 +65,12 @@ class PMConfig:
 	# -------------------- #
 	def parseLine( self, line, nsl = list() ):
 		"""Parse a line."""
+		# How it works:
+		# Split the string using "=".
+		# If the split is succesful, continue.
+		# If there's an "!" before the split, don't bother.
+		# Get the key and value pair.
+		# Apply to self.props.
 		data = line.split( "=", 2 )
 		if( len( data ) == 2 ):
 			if( data[0][-1] == "!" ):
