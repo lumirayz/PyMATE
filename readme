@@ -7,6 +7,7 @@ How to run:
 How to install:
  - Windows: uhhhh, don't ask me
  - *nix: cp the contents of the src folder to /usr/share/pymate and make a
-   symlink to pymate.sh in /usr/bin.
+   symlink to pymate.sh in /usr/bin. (might want to delete pymate.bat, it's
+   useless on non-windows systems.
 
 Depends on: wxPython, http://wxpython.org/download.php
