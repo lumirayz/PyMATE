@@ -12,7 +12,8 @@ How to install:
 
 How to configure:
  Possible locations of config files: /usr/share/pymate/pymate.conf,
-  ~/.config/pymate/pymate.conf, (pymate dir)/pymate.conf
+  ~/.config/pymate/pymate.conf, (pymate dir)/pymate.conf or file specified with
+  the -f command-line parameter.
  Configuration is ini-style, examples:
  
  editor.tab.mode = full
