@@ -10,4 +10,25 @@ How to install:
    symlink to pymate.sh in /usr/bin. (might want to delete pymate.bat, it's
    useless on non-windows systems.
 
+How to configure:
+ Possible locations of config files: /usr/share/pymate/pymate.conf,
+  ~/.config/pymate/pymate.conf, (pymate dir)/pymate.conf
+ Configuration is ini-style, examples:
+ 
+ editor.tab.mode = full
+ editor.indent.auto = 1
+ 
+ [editor]
+  [tab]
+   mode = full
+  [indent]
+   auto = 1
+ 
+ [editor.tab]
+  mode=full
+ [editor.indent]
+  auto= 1
+ 
+ All of the above are equivalent.
+
 Depends on: wxPython, http://wxpython.org/download.php

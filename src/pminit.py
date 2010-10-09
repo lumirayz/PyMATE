@@ -43,6 +43,10 @@ parser = OptionParser()
 
 parser.add_option( "-v", "--version", dest = "version", action = "store_true",
 	default = False, help = "show version info and exit" )
+parser.add_option( "-d", "--dump", dest = "dump", action = "store_true",
+	default = False, help = "dump configuration and exit" )
+parser.add_option( "-n", "--nice-dump", dest = "pdump", action = "store_true",
+	default = False, help = "dump configuration in a nice way and exit" )
 parser.add_option( "-f", "--set-config-file", dest = "configFile",
 	help = "Set the configuration file.", default = None )
 parser.add_option( "-c", "--add-config",
@@ -74,12 +78,15 @@ if( __name__ == "__main__" ):
 	
 	configFile = options.configFile
 	if( configFile ):
-		
 		if( os.path.isfile( configFile ) ):
 			conf.parseFile( configFile )
 		else:
 			print( "error: Specified configuration file( " + configFile + " ) doesn't exist." )
 			exit()
+	
+	if( options.dump or options.pdump ):
+		print conf.dumpConfiguration()
+		exit()
 	
 	conf.args = args
 	conf.opts = options

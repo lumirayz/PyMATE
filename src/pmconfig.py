@@ -110,6 +110,7 @@ class PMConfig:
 	# Load a dict
 	# -------------------- #
 	def loadDict( self, di, ns = list() ):
+		"""Load a dictionary."""
 		for key, val in di.items():
 			if( type( val ) == dict ):
 				self.loadDict( val, ns + [ key ] )
@@ -120,7 +121,17 @@ class PMConfig:
 	# Defaults
 	# -------------------- #
 	def loadDefaults( self ):
+		"""Load the default dictionary."""
 		self.loadDict( PMConfig.defaults )
+	
+	# -------------------- #
+	# Dumps
+	# -------------------- #
+	def dumpConfiguration( self, pretty = False ):
+		buff = ""
+		for prop, val in self.props.items():
+			buff += prop + " = " + val + "\n"
+		return buff
 	
 	# -------------------- #
 	# Properties
