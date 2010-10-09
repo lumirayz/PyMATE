@@ -19,7 +19,6 @@ import os
 # Init
 # -------------------- #
 rules = list()
-configFile = ""
 
 # -------------------- #
 # Functions
@@ -37,9 +36,6 @@ def add_config( opt, optstr, var, parser ):
 	"""Add a rule to the configuration."""
 	rules.append( var )
 
-def set_config_file( opt, optstr, var, parser ):
-	configFile = var
-
 # -------------------- #
 # OptionParser
 # -------------------- #
@@ -47,9 +43,8 @@ parser = OptionParser()
 
 parser.add_option( "-v", "--version", dest = "version", action = "store_true",
 	default = False, help = "show version info and exit" )
-parser.add_option( "-f", "--set-config-file",
-	callback = set_config_file, action = "callback", type = str,
-	help = "Set the configuration file." )
+parser.add_option( "-f", "--set-config-file", dest = "configFile",
+	help = "Set the configuration file.", default = None )
 parser.add_option( "-c", "--add-config",
 	callback = add_config, action = "callback", type = str,
 	help = "Add additional configuration without editing config file." )
@@ -62,26 +57,34 @@ if( __name__ == "__main__" ):
 	
 	conf = pmconfig.PMConfig()
 	
-	confpaths = [
-		"/etc/pymate.conf",
-		"~/.config/pymate/pymate.conf"
-	]
+	if( options.version ):
+		showVersionInfo()
+		exit()
 	
-	confpaths.append( configFile )
+	confpaths = [
+		"/usr/share/pymate/pymate.conf",
+		"~/.config/pymate/pymate.conf",
+		os.path.abspath( os.path.dirname( __file__ ) ) + "/pymate.conf"
+	]
 	
 	for path in confpaths:
 		if( os.path.isfile( path ) ):
 			conf.parseFile( path )
+	
+	configFile = options.configFile
+	if( configFile ):
+		
+		if( os.path.isfile( configFile ) ):
+			conf.parseFile( configFile )
+		else:
+			print( "error: Specified configuration file( " + configFile + " ) doesn't exist." )
+			exit()
 	
 	conf.args = args
 	conf.opts = options
 	
 	for rule in rules:
 		conf.parseLine( rule )
-	
-	if( options.version ):
-		showVersionInfo()
-		exit()
 	
 	gui = pmgui.PMGui( conf )
 	gui.invokeMainLoop()

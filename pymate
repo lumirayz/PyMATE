@@ -1,3 +1,0 @@
-#!/bin/bash
-
-exec python "`dirname $0`/src/pminit.py" $@

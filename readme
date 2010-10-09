@@ -2,6 +2,11 @@ PyMATE - Python Minimalistic and Awesome Text Editor
 
 How to run:
  - Windows: untested, run "pymate.bat"
- - *nix: just run "pymate", might have to chmod +x it.
+ - *nix: just run "pymate.sh", might have to chmod +x it.
+
+How to install:
+ - Windows: uhhhh, don't ask me
+ - *nix: cp the contents of the src folder to /usr/share/pymate and make a
+   symlink to pymate.sh in /usr/bin.
 
 Depends on: wxPython, http://wxpython.org/download.php
