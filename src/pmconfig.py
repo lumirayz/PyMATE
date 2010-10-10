@@ -44,6 +44,9 @@ class PMConfig:
 			"highlight": {
 				"bracket": "1",
 				"syntax": "1"
+			},
+			"cosmetic": {
+				"line_numbers": "0"
 			}
 		}
 	}

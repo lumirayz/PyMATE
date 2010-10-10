@@ -11,6 +11,7 @@
 import wx
 import wx.stc
 import os
+import pmconfig
 
 # -------------------- #
 # Class PMPage
@@ -38,6 +39,10 @@ class PMPage( wx.Panel ):
 	# -------------------- #
 	def buildGUI( self ):
 		self.stc = wx.stc.StyledTextCtrl( self, wx.ID_ANY )
+		
+		if( self.conf.getProperty( "editor.cosmetic.line_numbers" ) == "1" ):
+			self.stc.SetMarginType( 1, wx.stc.STC_MARGIN_NUMBER )
+		
 		self.sizer = wx.BoxSizer()
 		self.sizer.Add( self.stc, 1, wx.EXPAND )
 		self.SetSizer( self.sizer )
