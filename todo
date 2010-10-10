@@ -8,5 +8,5 @@
 - syntax highlighting
 - tab modes: NONE, WORKSPACE, FULL
 - fix pymate.bat for command-line arguments
-
+- plugin system
 

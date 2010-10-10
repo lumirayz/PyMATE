@@ -8,7 +8,11 @@
 # -------------------- #
 # Imports
 # -------------------- #
-import wx
+try:
+	import wx
+except ImportError:
+	print "error: wxPython not found."
+	exit()
 import os
 import pmpage
 
