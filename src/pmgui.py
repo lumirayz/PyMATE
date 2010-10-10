@@ -41,6 +41,13 @@ class PMGui( wx.Frame ):
 		"right": wx.NB_RIGHT
 	}
 	
+	TabTypeTable = {
+		"notebook": wx.Notebook,
+		"listbook": wx.Listbook,
+		"treebook": wx.Treebook,
+		"choicebook": wx.Choicebook
+	}
+	
 	# -------------------- #
 	# Init	
 	# -------------------- #
@@ -49,10 +56,14 @@ class PMGui( wx.Frame ):
 		wx.Frame.__init__( self, None, wx.ID_ANY, "PyMATE" )
 		self.conf = config
 		self.buildInit()
+		self.configure()
 		for arg in self.conf.args:
 			if( os.path.isfile( arg ) ):
 				page = self.addPageFromFile( arg )
 				self.switchToPage( page )
+	
+	def configure( self ):
+		pass
 	
 	# -------------------- #
 	# Main Loop
@@ -110,13 +121,18 @@ class PMGui( wx.Frame ):
 	
 	def buildNotebook( self ):
 		"""Builds the Notebook."""
-		pos = self.conf.getProperty( "editor.tab.position" )
-		pos = pos.lower()
+		typ = self.conf.getProperty( "editor.tab.type" ).lower()
+		try:
+			typ = PMGui.TabTypeTable[ typ ]
+		except KeyError:
+			typ = wx.Notebook
+		pos = self.conf.getProperty( "editor.tab.position" ).lower()
 		try:
 			pos = PMGui.TabPositionTable[ pos ]
 		except KeyError:
 			pos = wx.NB_LEFT
-		self.notebook = wx.Notebook( self, -1, wx.DefaultPosition, wx.DefaultSize, pos )
+		self.notebook = typ( self, -1, style = pos )
+		
 	
 	def bindEvents( self ):
 		"""Binds the events."""

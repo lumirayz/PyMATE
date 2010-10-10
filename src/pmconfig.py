@@ -29,7 +29,10 @@ class PMConfig:
 			"dialog": { "config_unsaved_close": "1" },
 			"tab": {
 				"mode": "full",
-				"position": "right",
+				"type": "notebook",
+				"position": "left",
+				"show_full_path": "0",
+				"max_name_length": "20"
 			},
 			"startup": { "blank_file": "0" },
 			"backup": {

@@ -80,11 +80,18 @@ class PMPage( wx.Panel ):
 	def updateTitle( self ):
 		"""Updates the page's title."""
 		if( self.file ):
-			title = os.path.basename( self.file )
+			if( self.conf.getProperty( "editor.tab.show_full_path" ) == "1" ):
+				title = os.path.abspath( self.file )
+			else:
+				title = os.path.basename( self.file )
 			if( self.edited ):
 				title += " *"
 		else:
 			title = "**Unsaved**"
+		mlen = int( self.conf.getProperty( "editor.tab.max_name_length" ) )
+		if( len( title ) > mlen ):
+			title = title[:mlen - 3] + "..."
+		
 		self.setTitle( title )
 	
 	# -------------------- #
