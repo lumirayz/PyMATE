@@ -243,7 +243,7 @@ class PMGui( wx.Frame ):
 		if( tmode == "full" or tmode == "workspace" ):
 			page = pmpage.PMPage( self.notebook, self )
 			self.notebook.AddPage( page, "" )
-			page.initialize()
+			page.configure()
 			return page
 		elif( tmode == "none" ):
 			#Reserved for no-tab mode.

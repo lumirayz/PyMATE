@@ -46,7 +46,8 @@ class PMConfig:
 				"syntax": "1"
 			},
 			"cosmetic": {
-				"line_numbers": "0"
+				"line_numbers": "0",
+				"wrap_mode": "none"
 			}
 		}
 	}

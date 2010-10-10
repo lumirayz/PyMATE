@@ -20,6 +20,14 @@ class PMPage( wx.Panel ):
 	"""Class for handling pages."""
 	
 	# -------------------- #
+	# Class variables
+	# -------------------- #
+	wrap_modes = {
+		"none": wx.stc.STC_WRAP_NONE,
+		"word": wx.stc.STC_WRAP_WORD
+	}
+	
+	# -------------------- #
 	# Init
 	# -------------------- #
 	def __init__( self, parent, gui ):
@@ -31,8 +39,13 @@ class PMPage( wx.Panel ):
 		self.buildGUI()
 		self.bindEvents()
 	
-	def initialize( self ):
+	def configure( self ):
 		self.updateTitle()
+		wm = self.conf.getProperty( "editor.cosmetic.wrap_mode" ).lower()
+		try:
+			self.stc.SetWrapMode( PMPage.wrap_modes[wm] )
+		except KeyError:
+			pass #Invalid wrap_mode!
 	
 	# -------------------- #
 	# GUI init
