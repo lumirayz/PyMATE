@@ -58,6 +58,9 @@ class PMPage( wx.Panel ):
 		color.SetFromName( bkg )
 		self.stc.SetBackgroundColour( color )
 		# --
+		self.stc.SetIndentationGuides(
+			bool( int( self.conf.getProperty( "editor.cosmetic.indentation_guides" ) ) )
+		)
 		llm = self.conf.getProperty( "editor.cosmetic.longline.marker" ).lower()
 		try:
 			self.stc.SetEdgeMode( PMPage.long_line_markers[llm] )

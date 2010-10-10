@@ -51,6 +51,7 @@ class PMConfig:
 			"cosmetic": {
 				"line_numbers": "0",
 				"wrap_mode": "none",
+				"indentation_guides": "0",
 				"background_color": "#1111AA",
 				"longline": {
 					"marker": "line",
