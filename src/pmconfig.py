@@ -24,7 +24,7 @@ class PMConfig:
 	# -------------------- #
 	# Defaults
 	# -------------------- #
-	defaults = {
+	defaults = dict( {
 		"editor": {
 			"dialog": { "config_unsaved_close": "1" },
 			"tab": {
@@ -60,7 +60,7 @@ class PMConfig:
 				}
 			}
 		}
-	}
+	} )
 	
 	# -------------------- #
 	# File loading/saving
