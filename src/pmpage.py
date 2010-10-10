@@ -27,6 +27,12 @@ class PMPage( wx.Panel ):
 		"word": wx.stc.STC_WRAP_WORD
 	}
 	
+	long_line_markers = {
+		"none": wx.stc.STC_EDGE_NONE,
+		"line": wx.stc.STC_EDGE_LINE,
+		"background": wx.stc.STC_EDGE_BACKGROUND
+	}
+	
 	# -------------------- #
 	# Init
 	# -------------------- #
@@ -46,6 +52,23 @@ class PMPage( wx.Panel ):
 			self.stc.SetWrapMode( PMPage.wrap_modes[wm] )
 		except KeyError:
 			pass #Invalid wrap_mode!
+		# -- DOESN'T WORK --
+		bkg = self.conf.getProperty( "editor.cosmetic.background_color" )
+		color = wx.Colour()
+		color.SetFromName( bkg )
+		self.stc.SetBackgroundColour( color )
+		# --
+		llm = self.conf.getProperty( "editor.cosmetic.longline.marker" ).lower()
+		try:
+			self.stc.SetEdgeMode( PMPage.long_line_markers[llm] )
+			lll = int( self.conf.getProperty( "editor.cosmetic.longline.length" ) )
+			self.stc.SetEdgeColumn( lll )
+			llc = self.conf.getProperty( "editor.cosmetic.longline.color" )
+			color = wx.Colour()
+			color.SetFromName( llc )
+			self.stc.SetEdgeColour( color )
+		except KeyError:
+			pass
 	
 	# -------------------- #
 	# GUI init

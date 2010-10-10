@@ -50,7 +50,13 @@ class PMConfig:
 			},
 			"cosmetic": {
 				"line_numbers": "0",
-				"wrap_mode": "none"
+				"wrap_mode": "none",
+				"background_color": "#1111AA",
+				"longline": {
+					"marker": "line",
+					"length": "80",
+					"color": "#FF0000"
+				}
 			}
 		}
 	}
@@ -77,7 +83,7 @@ class PMConfig:
 		for line in fd:
 			line = line.rstrip( "\r\n" )
 			ind = 0
-			if( len( line ) < 2 ):
+			if( len( line ) <= 2 ):
 				continue
 			while( line[0] == "\t" ):
 				line = line[1:]
