@@ -34,19 +34,10 @@ class PMConfig:
 				"show_full_path": "0",
 				"max_name_length": "20"
 			},
-			"startup": { "blank_file": "0" },
-			"backup": {
-				"enabled": "1",
-				"suffix": ".bak"
-			},
 			"indent": {
 				"auto": "1",
 				"spaces": "0",
 				"tabsize": "2",
-			},
-			"highlight": {
-				"bracket": "1",
-				"syntax": "1"
 			},
 			"cosmetic": {
 				"line_numbers": "0",
