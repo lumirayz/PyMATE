@@ -85,7 +85,7 @@ if( __name__ == "__main__" ):
 			exit()
 	
 	if( options.dump or options.pdump ):
-		print conf.dumpConfiguration()
+		print conf.dumpConfiguration( options.pdump )
 		exit()
 	
 	conf.args = args

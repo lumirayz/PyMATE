@@ -139,13 +139,49 @@ class PMConfig:
 		self.loadDict( PMConfig.defaults )
 	
 	# -------------------- #
+	# toDict
+	# -------------------- #
+	def toDict( self ):
+		di = dict()
+		for key, val in self.props.items():
+			data = key.split( "." )
+			ns = data[:-1]
+			key = data[-1]
+			ptr = di
+			for loc in ns:
+				try:
+					ptr = ptr[loc]
+				except KeyError:
+					ptr[loc] = dict()
+					ptr = ptr[loc]
+			ptr[key] = val
+		return di
+	
+	# -------------------- #
+	# dictToConfig
+	# -------------------- #
+	def dictToConfig( self, di, ns = list() ):
+		buff = ""
+		for key, val in di.items():
+			if( type( val ) == dict ):
+				buff += "\t" * len( ns ) + "[" + key + "]\n"
+				buff += self.dictToConfig( val, ns + [ key ] )
+			elif( type( val ) == str ):
+				buff += "\t" * len( ns ) + key + " = " + val + "\n"
+		return buff
+	
+	# -------------------- #
 	# Dumps
 	# -------------------- #
 	def dumpConfiguration( self, pretty = False ):
-		buff = ""
-		for prop, val in self.props.items():
-			buff += prop + " = " + val + "\n"
-		return buff
+		if( pretty ):
+			di = self.toDict()
+			return self.dictToConfig( di )
+		else:
+			buff = ""
+			for prop, val in self.props.items():
+				buff += prop + " = " + val + "\n"
+			return buff
 	
 	# -------------------- #
 	# Properties
