@@ -8,3 +8,5 @@
 - fix pymate.bat for command-line arguments
 - plugin system
 
+URGENT BUGS:
+- long line marker is stupid and doesnt comply to the font's width

@@ -39,6 +39,9 @@ class PMConfig:
 				"spaces": "0",
 				"tabsize": "2",
 			},
+			"font": {
+				"face": "Monospace"
+			},
 			"cosmetic": {
 				"line_numbers": "0",
 				"wrap_mode": "none",

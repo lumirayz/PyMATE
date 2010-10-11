@@ -82,6 +82,11 @@ class PMPage( wx.Panel ):
 	def buildGUI( self ):
 		self.stc = wx.stc.StyledTextCtrl( self, wx.ID_ANY )
 		
+		self.stc.StyleSetFont( 0, wx.Font( 8, wx.FONTFAMILY_MODERN,
+			wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, 0,
+				self.conf.getProperty( "editor.font.face" ),
+			wx.FONTENCODING_SYSTEM ) );
+		
 		if( self.conf.getProperty( "editor.cosmetic.line_numbers" ) == "1" ):
 			self.stc.SetMarginType( 1, wx.stc.STC_MARGIN_NUMBER )
 		
