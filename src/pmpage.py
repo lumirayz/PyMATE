@@ -53,6 +53,8 @@ class PMPage( wx.Panel ):
 			self.stc.SetWrapMode( PMPage.wrap_modes[wm] )
 		except KeyError:
 			pass #Invalid wrap_mode!
+		ts = int( self.conf.getProperty( "editor.indent.tabsize" ) )
+		self.stc.SetTabWidth( ts )
 		# -- DOESN'T WORK --
 		bkg = self.conf.getProperty( "editor.cosmetic.background_color" )
 		color = wx.Colour()
