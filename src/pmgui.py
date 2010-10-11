@@ -94,8 +94,6 @@ class PMGui( wx.Frame ):
 		"""Builds the main GUI."""
 		self.menubar = wx.MenuBar()
 		self.file_menu = wx.Menu()
-		self.help_menu = wx.Menu()
-		self.edit_menu = wx.Menu()
 		self.sizer = wx.BoxSizer()
 	
 	def buildMenu( self ):
@@ -109,19 +107,14 @@ class PMGui( wx.Frame ):
 		self.file_save_as = self.file_menu.Append( wx.ID_SAVEAS,
 			"Save &As" , "Save current file as." )
 		self.file_menu.AppendSeparator()
+		self.file_about = self.file_menu.Append( wx.ID_ABOUT,
+			"&About", "About the program." )
+		self.file_menu.AppendSeparator()
 		self.file_close = self.file_menu.Append( wx.ID_CLOSE,
 			"&Close" , "Close the current tab." )
 		self.file_exit = self.file_menu.Append( wx.ID_EXIT,
 			"E&xit" , "Terminate the program." )
 		self.menubar.Append( self.file_menu, "&File" )
-		self.edit_undo = self.edit_menu.Append( wx.ID_UNDO,
-			"&Undo" , "Undo last action." )
-		self.edit_redo = self.edit_menu.Append( wx.ID_REDO,
-			"&Redo" , "Redo undone action." )
-		self.menubar.Append( self.edit_menu, "&Edit" )
-		self.help_about = self.help_menu.Append( wx.ID_ABOUT,
-			"&About", "About the program." )
-		self.menubar.Append( self.help_menu, "&Help" )
 	
 	def buildNotebook( self ):
 		"""Builds the Notebook."""
@@ -146,9 +139,7 @@ class PMGui( wx.Frame ):
 		self.Bind( wx.EVT_MENU, self.evtMenuSaveAs, self.file_save_as )
 		self.Bind( wx.EVT_MENU, self.evtMenuClose, self.file_close )
 		self.Bind( wx.EVT_MENU, self.evtMenuExit, self.file_exit )
-		self.Bind( wx.EVT_MENU, self.evtMenuAbout, self.help_about )
-		self.Bind( wx.EVT_MENU, self.evtMenuUndo, self.edit_undo )
-		self.Bind( wx.EVT_MENU, self.evtMenuRedo, self.edit_redo )
+		self.Bind( wx.EVT_MENU, self.evtMenuAbout, self.file_about )
 	
 	# -------------------- #
 	# Util functions related to the GUI
@@ -201,17 +192,6 @@ class PMGui( wx.Frame ):
 		if( sel ):
 			self.removePage( sel )
 	
-	# - Related to text editing
-	def evtMenuUndo( self, evt ):
-		sel = self.getCurrentPage()
-		if( sel ):
-			sel.invokeUndo()
-	
-	def evtMenuRedo( self, evt ):
-		sel = self.getCurrentPage()
-		if( sel ):
-			sel.invokeRedo()
-	
 	# - Related to the program
 	def evtMenuExit( self, evt ):
 		self.Close()
@@ -224,9 +204,10 @@ class PMGui( wx.Frame ):
 	# -------------------- #
 	def viewAbout( self ):
 		"""View about dialog."""
-		adlg = wx.MessageDialog( self, PMGui.about, "About PyMATE", wx.OK )
-		adlg.ShowModal()
-		adlg.Destroy()
+		page = self.addPage()
+		page.setText( self.about )
+		self.switchToPage( page )
+		page.setTitle( "About" )
 		pass
 	
 	def viewCloseRequest( self ):
@@ -234,12 +215,9 @@ class PMGui( wx.Frame ):
 		crdlg = wx.MessageDialog( self, "There are unsaved changes, really close?",
 			"Confirmation",
 			wx.YES_NO | wx.NO_DEFAULT | wx.ICON_QUESTION )
-		if( crdlg.ShowModal() == wx.ID_YES ):
-			crdlg.Destroy()
-			return 1
-		else:
-			crdlg.Destroy()
-			return 0
+		
+		crdlg.Destroy()
+		return crdlg.ShowModal() == wx.ID_YES
 	
 	def viewFileDialog( self, title, mask, mode ):
 		"""Ask for a file."""

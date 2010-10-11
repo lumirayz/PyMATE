@@ -97,7 +97,7 @@ class PMPage( wx.Panel ):
 		self.updateTitle()
 	
 	# -------------------- #
-	# Util function related to title
+	# Util
 	# -------------------- #
 	def setTitle( self, title ):
 		"""Set the page's title."""
@@ -120,15 +120,12 @@ class PMPage( wx.Panel ):
 		
 		self.setTitle( title )
 	
+	def setText( self, text ):
+		self.stc.SetText( text )
+	
 	# -------------------- #
 	# Invokes from PMGui
 	# -------------------- #
-	def invokeUndo( self ):
-		self.stc.Undo()
-	
-	def invokeRedo( self ):
-		self.stc.Redo()
-	
 	def invokeCloseRequest( self ):
 		if( self.edited ):
 			answer = self.gui.viewCloseRequest()
@@ -151,7 +148,7 @@ class PMPage( wx.Panel ):
 				f = self.file
 		fd = open( f, "r" )
 		self.file = f
-		self.stc.SetText( fd.read() )
+		self.setText( fd.read() )
 		self.edited = False
 		self.updateTitle()
 		fd.close()
