@@ -42,6 +42,7 @@ class PMPage( wx.Panel ):
 		self.conf = self.gui.conf
 		self.edited = False
 		self.file = None
+		self.titleUpdate = True
 		self.buildGUI()
 		self.bindEvents()
 	
@@ -94,7 +95,8 @@ class PMPage( wx.Panel ):
 	# -------------------- #
 	def evtSTCOnTextChange( self, evt ):
 		self.edited = True
-		self.updateTitle()
+		if( self.titleUpdate ):
+			self.updateTitle()
 	
 	# -------------------- #
 	# Util
@@ -121,7 +123,18 @@ class PMPage( wx.Panel ):
 		self.setTitle( title )
 	
 	def setText( self, text ):
+		"""Set the contents of the page."""
 		self.stc.SetText( text )
+	
+	def setTitleUpdate( self, update ):
+		"""Set whether the title should update automatically."""
+		self.titleUpdate = update
+	
+	def setEdited( self, edited ):
+		"""Set whether this page should be considered modified."""
+		self.edited = edited
+		if( self.titleUpdate ):
+			self.updateTitle()
 	
 	# -------------------- #
 	# Invokes from PMGui
@@ -150,6 +163,7 @@ class PMPage( wx.Panel ):
 		self.file = f
 		self.setText( fd.read() )
 		self.edited = False
+		self.titleUpdate = True
 		self.updateTitle()
 		fd.close()
 	
@@ -163,6 +177,7 @@ class PMPage( wx.Panel ):
 		fd = open( f, "w" )
 		self.file = f
 		self.edited = False
+		self.titleUpdate = True
 		self.updateTitle()
 		fd.write( self.stc.GetText() )
 		fd.close()

@@ -208,6 +208,8 @@ class PMGui( wx.Frame ):
 		page.setText( self.about )
 		self.switchToPage( page )
 		page.setTitle( "About" )
+		page.setTitleUpdate( False )
+		page.setEdited( False )
 		pass
 	
 	def viewCloseRequest( self ):
@@ -215,9 +217,9 @@ class PMGui( wx.Frame ):
 		crdlg = wx.MessageDialog( self, "There are unsaved changes, really close?",
 			"Confirmation",
 			wx.YES_NO | wx.NO_DEFAULT | wx.ICON_QUESTION )
-		
+		succ = crdlg.ShowModal() == wx.ID_YES
 		crdlg.Destroy()
-		return crdlg.ShowModal() == wx.ID_YES
+		return succ
 	
 	def viewFileDialog( self, title, mask, mode ):
 		"""Ask for a file."""
