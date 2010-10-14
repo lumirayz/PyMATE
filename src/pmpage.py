@@ -70,8 +70,10 @@ class PMPage( wx.Panel ):
 		self.stc.SetIndentationGuides(
 			bool( int( self.conf.getProperty( "editor.cosmetic.indentation_guides" ) ) )
 		)
+		self.stc.SetViewEOL(
+			bool( int( self.conf.getProperty( "editor.cosmetic.view_eol" ) ) )
+		)
 		vw = self.conf.getProperty( "editor.cosmetic.view_whitespace" ).lower()
-		print vw
 		try:
 			self.stc.SetViewWhiteSpace( PMPage.view_whitespace_modes[ vw ] )
 		except KeyError:

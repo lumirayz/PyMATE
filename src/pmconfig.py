@@ -48,6 +48,7 @@ class PMConfig:
 				"indentation_guides": "0",
 				"background_color": "#1111AA",
 				"view_whitespace": "never",
+				"view_eol": "0",
 				"longline": {
 					"marker": "line",
 					"length": "80",
