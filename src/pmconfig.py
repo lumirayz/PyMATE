@@ -47,6 +47,7 @@ class PMConfig:
 				"wrap_mode": "none",
 				"indentation_guides": "0",
 				"background_color": "#1111AA",
+				"view_whitespace": "never",
 				"longline": {
 					"marker": "line",
 					"length": "80",

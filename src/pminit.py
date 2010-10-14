@@ -81,7 +81,7 @@ if( __name__ == "__main__" ):
 		if( os.path.isfile( configFile ) ):
 			conf.parseFile( configFile )
 		else:
-			print( "error: Specified configuration file( " + configFile + " ) doesn't exist." )
+			parser.error( "Specified configuration file( " + configFile + " ) doesn't exist." )
 			exit()
 	
 	if( options.dump or options.pdump ):

@@ -33,6 +33,12 @@ class PMPage( wx.Panel ):
 		"background": wx.stc.STC_EDGE_BACKGROUND
 	}
 	
+	view_whitespace_modes = {
+		"always": wx.stc.STC_WS_VISIBLEALWAYS,
+		"after_indent": wx.stc.STC_WS_VISIBLEAFTERINDENT,
+		"never": wx.stc.STC_WS_INVISIBLE
+	}
+	
 	# -------------------- #
 	# Init
 	# -------------------- #
@@ -64,6 +70,12 @@ class PMPage( wx.Panel ):
 		self.stc.SetIndentationGuides(
 			bool( int( self.conf.getProperty( "editor.cosmetic.indentation_guides" ) ) )
 		)
+		vw = self.conf.getProperty( "editor.cosmetic.view_whitespace" ).lower()
+		print vw
+		try:
+			self.stc.SetViewWhiteSpace( PMPage.view_whitespace_modes[ vw ] )
+		except KeyError:
+			pass
 		self.stc.SetUseTabs(
 			not bool( int( self.conf.getProperty( "editor.indent.spaces" ) ) )
 		)
