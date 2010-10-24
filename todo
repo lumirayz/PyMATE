@@ -1,4 +1,3 @@
-- auto indentation
 - add saving configuration
 - comment/uncomment
 - syntax highlighting
@@ -8,3 +7,4 @@
 
 URGENT BUGS:
 - long line marker is stupid and doesnt comply to the font's width
+- fix pymate.sh to make it work when installed

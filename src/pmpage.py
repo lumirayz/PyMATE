@@ -92,6 +92,7 @@ class PMPage( wx.Panel ):
 			self.stc.SetEdgeColour( color )
 		except KeyError:
 			pass
+		self.auto_indent = bool( int( self.conf.getProperty( "editor.indent.auto" ) ) )
 	
 	# -------------------- #
 	# GUI init
@@ -113,6 +114,7 @@ class PMPage( wx.Panel ):
 	
 	def bindEvents( self ):
 		self.Bind( wx.stc.EVT_STC_CHANGE, self.evtSTCOnTextChange, self.stc )
+		self.Bind( wx.stc.EVT_STC_CHARADDED, self.evtSTCOnCharAdded, self.stc )
 	
 	# -------------------- #
 	# Event Handlers
@@ -121,6 +123,14 @@ class PMPage( wx.Panel ):
 		self.edited = True
 		if( self.titleUpdate ):
 			self.updateTitle()
+	
+	def evtSTCOnCharAdded( self, evt ):
+		if( self.auto_indent and chr( evt.GetKey() ) == "\n" ):
+			curline = self.stc.GetCurrentLine()
+			self.stc.SetLineIndentation( curline, self.stc.GetLineIndentation( curline - 1 ) )
+			pos = self.stc.GetLineIndentPosition( curline )
+			self.stc.SetAnchor( pos )
+			self.stc.SetCurrentPos( pos )
 	
 	# -------------------- #
 	# Util
@@ -143,7 +153,6 @@ class PMPage( wx.Panel ):
 		mlen = int( self.conf.getProperty( "editor.tab.max_name_length" ) )
 		if( len( title ) > mlen ):
 			title = title[:mlen - 3] + "..."
-		
 		self.setTitle( title )
 	
 	def setText( self, text ):
